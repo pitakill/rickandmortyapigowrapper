@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"strconv"
 	"time"
 )
 
@@ -26,8 +27,16 @@ func makePetition(options map[string]interface{}) (map[string]interface{}, error
 			if k == "params" {
 				hasParams = true
 			}
+		case map[string]int:
+			if k == "params" {
+				// Modify the URL, i.e. the endpoint
+				integer := strconv.FormatInt(int64(v.(map[string]int)["integer"]), 10)
+				endpoint = endpoint + integer
+				// Delete the parameters
+				delete(options, "params")
+			}
 		default:
-			err := fmt.Sprintf("The option %s is type: %T (value: %v), must be a string.", k, v, v)
+			err := fmt.Sprintf("The option %s is type: %T (value: %v), must be a string or a map[string]string", k, v, v)
 			return nil, errors.New(err)
 		}
 	}
