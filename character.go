@@ -90,3 +90,23 @@ func GetCharacter(integer int) (*Character, error) {
 
 	return character, nil
 }
+
+func GetCharactersArray(integers []int) (*MultipleCharacters, error) {
+	options := map[string]interface{}{
+		"endpoint": endpoint,
+		"integers": integers,
+	}
+
+	data, err := makePetition(options)
+	if err != nil {
+		return &MultipleCharacters{}, err
+	}
+
+	characters := new(MultipleCharacters)
+
+	if err := mapstructure.Decode(data, &characters); err != nil {
+		return &MultipleCharacters{}, err
+	}
+
+	return characters, nil
+}

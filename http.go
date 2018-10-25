@@ -6,10 +6,11 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+	"strings"
 	"time"
 )
 
-func makePetition(options map[string]interface{}) (map[string]interface{}, error) {
+func makePetition(options map[string]interface{}) (interface{}, error) {
 	client := &http.Client{
 		Timeout: 5 * time.Second,
 	}
@@ -35,8 +36,11 @@ func makePetition(options map[string]interface{}) (map[string]interface{}, error
 				// Delete the parameters
 				delete(options, "params")
 			}
+		case []int:
+			params := strings.Trim(strings.Join(strings.Fields(fmt.Sprint(v.([]int))), ","), "[]")
+			endpoint = endpoint + params
 		default:
-			err := fmt.Sprintf("The option %s is type: %T (value: %v), must be a string or a map[string]string", k, v, v)
+			err := sliceIntToString(v.([]int), ",")
 			return nil, errors.New(err)
 		}
 	}
@@ -62,7 +66,7 @@ func makePetition(options map[string]interface{}) (map[string]interface{}, error
 	}
 	defer res.Body.Close()
 
-	response := make(map[string]interface{})
+	var response interface{}
 
 	err = json.NewDecoder(res.Body).Decode(&response)
 	if err != nil {

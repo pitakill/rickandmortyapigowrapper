@@ -235,3 +235,27 @@ func TestGetCharacterSixtySix(t *testing.T) {
 		t.Error(result)
 	}
 }
+
+func TestGetCharactersArray(t *testing.T) {
+	characters, err := GetCharactersArray([]int{1, 183})
+	if err != nil {
+		t.Error(err)
+	}
+
+	data, err := readFile("test-data/characters_1-183.json")
+	if err != nil {
+		t.Error(err)
+	}
+
+	result := new(MultipleCharacters)
+
+	json.Unmarshal(data, &result)
+
+	comparation := cmp.Equal(result, characters)
+	if !comparation {
+		t.Error("The response from GetCharactersArray was:")
+		t.Error(characters)
+		t.Error("The data against is being run this test is:")
+		t.Error(result)
+	}
+}
