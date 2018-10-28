@@ -3,7 +3,7 @@ package rickandmorty
 type Episode struct {
 	ID         int      `json:"id"`
 	Name       string   `json:"name"`
-	AirDate    string   `json:"air_date"`
+	Air_Date   string   `json:"air_date"`
 	Episode    string   `json:"episode"`
 	Characters []string `json:"characters"`
 	URL        string   `json:"url"`
@@ -16,7 +16,3 @@ type AllEpisodes struct {
 }
 
 type MultipleEpisodes []Episode
-
-func (e Episode) GetID() int {
-	return e.ID
-}

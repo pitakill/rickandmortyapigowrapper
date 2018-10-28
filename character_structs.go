@@ -27,15 +27,3 @@ type AllCharacters struct {
 }
 
 type MultipleCharacters []Character
-
-func (c Character) GetID() int {
-	return c.ID
-}
-
-func (ac AllCharacters) GetInfo() Info {
-	return ac.Info
-}
-
-func (ac AllCharacters) GetResults() []Character {
-	return ac.Results
-}

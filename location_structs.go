@@ -16,7 +16,3 @@ type AllLocations struct {
 }
 
 type MultipleLocations []Location
-
-func (l Location) GetID() int {
-	return l.ID
-}

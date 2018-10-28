@@ -6,8 +6,8 @@ import (
 	"github.com/mitchellh/mapstructure"
 )
 
-func GetCharacters(options map[string]interface{}) (*AllCharacters, error) {
-	endpoint := endpointCharacter
+func GetEpisodes(options map[string]interface{}) (*AllEpisodes, error) {
+	endpoint := endpointEpisode
 
 	hasParams := false
 	params := make(map[string]string)
@@ -55,20 +55,20 @@ func GetCharacters(options map[string]interface{}) (*AllCharacters, error) {
 
 	data, err := makePetition(options)
 	if err != nil {
-		return &AllCharacters{}, err
+		return &AllEpisodes{}, err
 	}
 
-	characters := new(AllCharacters)
+	episodes := new(AllEpisodes)
 
-	if err := mapstructure.Decode(data, &characters); err != nil {
-		return &AllCharacters{}, err
+	if err := mapstructure.Decode(data, &episodes); err != nil {
+		return &AllEpisodes{}, err
 	}
 
-	return characters, nil
+	return episodes, nil
 }
 
-func GetCharacter(integer int) (*Character, error) {
-	endpoint := endpointCharacter
+func GetEpisode(integer int) (*Episode, error) {
+	endpoint := endpointEpisode
 
 	options := map[string]interface{}{
 		"endpoint": endpoint,
@@ -79,20 +79,20 @@ func GetCharacter(integer int) (*Character, error) {
 
 	data, err := makePetition(options)
 	if err != nil {
-		return &Character{}, err
+		return &Episode{}, err
 	}
 
-	character := new(Character)
+	episode := new(Episode)
 
-	if err := mapstructure.Decode(data, &character); err != nil {
-		return &Character{}, err
+	if err := mapstructure.Decode(data, &episode); err != nil {
+		return &Episode{}, err
 	}
 
-	return character, nil
+	return episode, nil
 }
 
-func GetCharactersArray(integers []int) (*MultipleCharacters, error) {
-	endpoint := endpointCharacter
+func GetEpisodesArray(integers []int) (*MultipleEpisodes, error) {
+	endpoint := endpointEpisode
 
 	options := map[string]interface{}{
 		"endpoint": endpoint,
@@ -101,14 +101,14 @@ func GetCharactersArray(integers []int) (*MultipleCharacters, error) {
 
 	data, err := makePetition(options)
 	if err != nil {
-		return &MultipleCharacters{}, err
+		return &MultipleEpisodes{}, err
 	}
 
-	characters := new(MultipleCharacters)
+	episodes := new(MultipleEpisodes)
 
-	if err := mapstructure.Decode(data, &characters); err != nil {
-		return &MultipleCharacters{}, err
+	if err := mapstructure.Decode(data, &episodes); err != nil {
+		return &MultipleEpisodes{}, err
 	}
 
-	return characters, nil
+	return episodes, nil
 }

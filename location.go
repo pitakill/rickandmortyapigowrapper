@@ -6,8 +6,8 @@ import (
 	"github.com/mitchellh/mapstructure"
 )
 
-func GetCharacters(options map[string]interface{}) (*AllCharacters, error) {
-	endpoint := endpointCharacter
+func GetLocations(options map[string]interface{}) (*AllLocations, error) {
+	endpoint := endpointLocation
 
 	hasParams := false
 	params := make(map[string]string)
@@ -55,20 +55,20 @@ func GetCharacters(options map[string]interface{}) (*AllCharacters, error) {
 
 	data, err := makePetition(options)
 	if err != nil {
-		return &AllCharacters{}, err
+		return &AllLocations{}, err
 	}
 
-	characters := new(AllCharacters)
+	locations := new(AllLocations)
 
-	if err := mapstructure.Decode(data, &characters); err != nil {
-		return &AllCharacters{}, err
+	if err := mapstructure.Decode(data, &locations); err != nil {
+		return &AllLocations{}, err
 	}
 
-	return characters, nil
+	return locations, nil
 }
 
-func GetCharacter(integer int) (*Character, error) {
-	endpoint := endpointCharacter
+func GetLocation(integer int) (*Location, error) {
+	endpoint := endpointLocation
 
 	options := map[string]interface{}{
 		"endpoint": endpoint,
@@ -79,20 +79,20 @@ func GetCharacter(integer int) (*Character, error) {
 
 	data, err := makePetition(options)
 	if err != nil {
-		return &Character{}, err
+		return &Location{}, err
 	}
 
-	character := new(Character)
+	location := new(Location)
 
-	if err := mapstructure.Decode(data, &character); err != nil {
-		return &Character{}, err
+	if err := mapstructure.Decode(data, &location); err != nil {
+		return &Location{}, err
 	}
 
-	return character, nil
+	return location, nil
 }
 
-func GetCharactersArray(integers []int) (*MultipleCharacters, error) {
-	endpoint := endpointCharacter
+func GetLocationsArray(integers []int) (*MultipleLocations, error) {
+	endpoint := endpointLocation
 
 	options := map[string]interface{}{
 		"endpoint": endpoint,
@@ -101,14 +101,14 @@ func GetCharactersArray(integers []int) (*MultipleCharacters, error) {
 
 	data, err := makePetition(options)
 	if err != nil {
-		return &MultipleCharacters{}, err
+		return &MultipleLocations{}, err
 	}
 
-	characters := new(MultipleCharacters)
+	locations := new(MultipleLocations)
 
-	if err := mapstructure.Decode(data, &characters); err != nil {
-		return &MultipleCharacters{}, err
+	if err := mapstructure.Decode(data, &locations); err != nil {
+		return &MultipleLocations{}, err
 	}
 
-	return characters, nil
+	return locations, nil
 }

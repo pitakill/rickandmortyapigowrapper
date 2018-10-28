@@ -2,8 +2,6 @@ package rickandmorty
 
 import (
 	"encoding/json"
-	"io/ioutil"
-	"os"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
@@ -37,19 +35,4 @@ func Test_makePetition(t *testing.T) {
 		t.Error("The data against is being run this test is:")
 		t.Error(endpoints)
 	}
-}
-
-func readFile(path string) ([]byte, error) {
-	jsonFile, err := os.Open(path)
-	if err != nil {
-		return nil, err
-	}
-	defer jsonFile.Close()
-
-	data, err := ioutil.ReadAll(jsonFile)
-	if err != nil {
-		return nil, err
-	}
-
-	return data, nil
 }
