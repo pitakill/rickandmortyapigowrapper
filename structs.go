@@ -14,11 +14,3 @@ type Endpoints struct {
 	Locations  string `json:"locations"`
 	Episodes   string `json:"episodes"`
 }
-
-type ResponseItem interface {
-	GetID() int
-}
-
-type ResponseAll interface {
-	GetInfo() Info
-}
