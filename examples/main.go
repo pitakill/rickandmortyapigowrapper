@@ -8,14 +8,19 @@ import (
 
 func main() {
 	// Episode
-	//printCharactersFromEpisode(30)
-	//printCharactersFromMultipleEpisodes([]int{30, 24, 1, 2})
-	//printNextPageEpisodes()
+	printCharactersFromEpisode(30)
+	printCharactersFromMultipleEpisodes([]int{30, 24, 1, 2})
+	printNextPageEpisodes()
 
 	// Location
-	//printResidentsFromLocation(1)
-	//printResidentsFromMultipleLocations([]int{3, 21})
+	printResidentsFromLocation(1)
+	printResidentsFromMultipleLocations([]int{3, 21})
 	printNextPageLocations()
+
+	// Character
+	printLocationFromCharacter(2)
+	printEpisodesFromCharacter(4)
+	printOriginFromCharacter(2)
 }
 
 func print(characters *rnm.MultipleCharacters, episode int, typeSection string) {
